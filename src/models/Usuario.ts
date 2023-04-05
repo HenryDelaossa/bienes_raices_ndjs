@@ -1,4 +1,5 @@
 import { DataTypes } from "sequelize";
+import bcrypt from "bcrypt";
 import db from "../db/connection";
 
 const Usuario = db.define("usuarios", {
@@ -16,7 +17,17 @@ const Usuario = db.define("usuarios", {
     },
     token: DataTypes.STRING,
     comfirmado: DataTypes.BOOLEAN
-})
+}, {
+    hooks: {
+        beforeCreate: async (usuario: any) => {
+            const salt = await bcrypt.genSalt(10);
+            const hash = await bcrypt.hash(usuario.password, salt);
+            usuario.password = hash;
+        }
+    }
+}
+
+)
 
 
 export default Usuario

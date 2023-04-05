@@ -5,16 +5,23 @@ import { usuariosController } from "../controllers/usuarios.controllers";
 const {
     login,
     registro,
-    forgetPassword
+    formularioRegistro,
+    resetPassword,
+    confirmationToken
 } = usuariosController;
 
 
 // router
 const router = Router();
 
+
+/**GET´s */
 router.get('/login', login);
-router.get('/registro', registro);
-router.get('/recuperar-password', forgetPassword);
+router.get('/registro', formularioRegistro);
+router.get('/recuperar-password', resetPassword);
+router.get('/:token', confirmationToken)
+/**POST´s */
+router.post('/registro', registro);
 
 
 

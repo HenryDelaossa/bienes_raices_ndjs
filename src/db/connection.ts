@@ -4,10 +4,10 @@ import config from "../config/config";
 
 const db = new Sequelize(
     config.db_name,
-    config.user || "",
-    config.password || "", {
+    config.user,
+    config.password, {
     host: config.host,
-    port: 4500,
+    port: config.port,
     dialect: "mysql",
     define: {
         timestamps: true
